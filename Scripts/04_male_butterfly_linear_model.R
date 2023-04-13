@@ -1,4 +1,8 @@
 ## Male butterfly Linear model 
+
+library(gpglot2)
+library(ggpubr)
+library(ISLR)
 #__________________________----
 
 ## TIBBLE CREATION---
