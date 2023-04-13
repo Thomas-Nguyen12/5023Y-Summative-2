@@ -4,6 +4,15 @@ library(tidyverse)
 library(ggplot2)
 library(ggpubr)
 
+#__________________________----
+## PLOTS ----
+
+## Plotting a scatter matrix for all variables
+## plot shows no clear relationship between variables
+## Will examine each relationship more closely
+GGally::ggpairs(butterfly)
+
+
 ## Here, i plot forewing_length against year 
 butterfly %>% 
   ggplot(aes(year, forewing_length)) + geom_point() + 
@@ -45,16 +54,10 @@ butterfly %>% ggplot(aes(forewing_length)) + geom_density(aes(colour=sex, fill=s
 
 
 
-
-
-
-
-
-
 ## Here, I plot the relationship between june_mean_rain and forewing_length between males and females
 butterfly %>% ggplot(aes(june_mean_rain, forewing_length)) + geom_point(aes(colour=sex)) + 
   geom_smooth(se=FALSE, aes(colour=sex)) + 
-  stat_cor(method="spearman", aes(colour=sex), label.x=c(400, 400), p.accuracy=0.001, r.accuracy=0.001)
+  stat_cor(method="pearson", aes(colour=sex), label.x=c(400, 400), p.accuracy=0.001, r.accuracy=0.001)
 ## Results show no correlation between june_mean_rain and forewing_length
 
 
@@ -68,15 +71,31 @@ butterfly %>% ggplot(aes(june_mean_temperature, forewing_length)) + geom_point()
 
 # This plot suggests that there is a very weak positive correlation between june_mean_temperature and the forewing_length of all butterflies
 
+#__________________________----
+## MODEL ----
 
-
-
-
+## Linear model for forewing_length and june_mean_temperature
+## Linear model suggests no positive correlation
+butterfly_lsmodel <- lm(forewing_length ~ june_mean_temperature)
+summary(butterfly_lsmodel)
 ## Here, I check the performance of this linear model
-performance::check_model(butterfly_lsmodel, check=c("normality", "qq", "homogeneity", "residuals"))
+## Boxcox suggests that including other interaction terms is unlikely to improve performance
+performance::check_model(butterfly_lsmodel)
+MASS::boxcox(butterfly_lsmodel)
 
+## Checking for outliers
+## Found outliers at x = 14, 17, 55, 57
+cooksD <- cooks.distance(butterfly_lsmodel)
+influential <- cooksD[(cooksD > (3 * mean(cooksD, na.rm = TRUE)))]
+influential
 
+## creating a new model excluding outliers
+## Model improved but still suggests a very weak to no positive correlation
+butterfly_lsmodel2 <- lm(forewing_length[-57:-17] ~ june_mean_temperature[-57:-17], data=butterfly)
+summary(butterfly_lsmodel2)
 
+#__________________________----
+## PLOTS ----
 ## Here, I compare the correlation between june_mean_temperature and forewing_length for males and females
 
 butterfly %>% ggplot(aes(june_mean_temperature, forewing_length)) + 
