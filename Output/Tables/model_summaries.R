@@ -5,7 +5,7 @@ library(gtsummary)
 
 ## All butterflies
 
-tab_model(butterfly_lsmodel2, title="Butterfly Forewing length against June Mean Temperature")
+tab_model(butterfly_lsmodel, title="Butterfly Forewing length against June Mean Temperature")
 
 ## Male butterflies
 
