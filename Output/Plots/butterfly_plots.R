@@ -29,7 +29,7 @@ cvdPlot(p)
 
 #__________________________----
 
-p1 <- butterfly_lsmodel2_tibble %>% ggplot(aes(june_mean_temperature, forewing_length)) + geom_point() + 
+p1 <- butterfly %>% ggplot(aes(june_mean_temperature, forewing_length)) + geom_point() + 
   geom_smooth(level=0.95, method="lm", linetype="dashed") + 
   theme_stata() + 
   stat_cor(method="pearson", label.y=c(15.5)) +
