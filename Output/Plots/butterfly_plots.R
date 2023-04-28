@@ -11,8 +11,7 @@ tbl_regression(male_lsmodel2)
 ## PLOTS ----
 
 ## All butterfly plot
-## Check forewing length units
-## Need to change position of legend
+
 p <- butterfly %>% ggplot(aes(june_mean_temperature, forewing_length)) + 
   geom_point(aes(colour=sex)) + 
   geom_smooth(aes(colour=sex), level=0.95, method="lm", linetype="dashed") + 
@@ -40,10 +39,12 @@ p1 <- butterfly_lsmodel2_tibble %>% ggplot(aes(june_mean_temperature, forewing_l
         legend.justification='right',
         legend.direction='horizontal') 
 ggExtra::ggMarginal(p1, type = "density", fill="grey") 
+
+## Checking plots for colour-blindness
 cvdPlot(p1)
 #__________________________----
 
-## Change the point colours
+## male linear model Plot
 
 p2 <- male_lsmodel2_tibble %>% ggplot(aes(june_mean_temperature, forewing_length)) + 
   geom_point() +
@@ -53,8 +54,14 @@ p2 <- male_lsmodel2_tibble %>% ggplot(aes(june_mean_temperature, forewing_length
   labs(x="June Mean Temperature (celsius)", y = "Forewing Length (cm)", title="Male Forewing Length against Mean Temperature") +
   stat_regline_equation(label.y=13.88, label.x=13)
 ggExtra::ggMarginal(p2, type="density", fill="grey")
+
+## Checking plots for colour-blindness
 cvdPlot(p2)
-##
+
+
+#__________________________----
+
+## Female linear model plot
 
 p3 <- female_lsmodel %>% ggplot(aes(june_mean_temperature, forewing_length)) + 
   geom_point() +
@@ -64,5 +71,7 @@ p3 <- female_lsmodel %>% ggplot(aes(june_mean_temperature, forewing_length)) +
   labs(x="June Mean Temperature (celsius)", y = "Forewing Length (cm)", title="Female Butterfly Forewing Length against June Mean Temperature") +
   stat_regline_equation(label.y=14.65, label.x=11.8)
 ggExtra::ggMarginal(p3, type="density", fill="grey")
+
+## Checking plots for colourblindness
 cvdPlot(p3)
 
