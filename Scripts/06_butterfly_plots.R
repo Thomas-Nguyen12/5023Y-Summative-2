@@ -2,7 +2,7 @@ library(ggExtra)
 library(ggplot2)
 library(ggthemes)
 library(colorBlindness)
-library(sjPlot)
+
 
 ## Do colourblind check
 #__________________________----

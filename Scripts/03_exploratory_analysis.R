@@ -1,6 +1,6 @@
-## Linear Model
+## Exploratory Analysis
 
-library(tidyverse)
+
 library(ggplot2)
 library(ggpubr)
 library(ISLR)

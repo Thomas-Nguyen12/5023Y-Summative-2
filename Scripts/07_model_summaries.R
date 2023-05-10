@@ -1,6 +1,6 @@
 library(sjPlot)
-library(kableExtra)
-library(magick)
+
+
 #__________________________----
 
 ## All butterflies
