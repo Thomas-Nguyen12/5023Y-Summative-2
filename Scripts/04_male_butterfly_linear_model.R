@@ -1,8 +1,9 @@
 ## Male butterfly Linear model 
 
-library(gpglot2)
+library(ggplot2)
 library(ggpubr)
 library(ISLR)
+
 #__________________________----
 
 ## TIBBLE CREATION---
@@ -65,8 +66,8 @@ best_lambda2 <- male_butterfly$june_mean_temperature[-26][which.max(male_butterf
 
 ## plotting male_lsmodel2 tibble
 june_mean_temperature <- male_butterfly$june_mean_temperature[-26]
-forewing_length <- male_butterfly$forewing_length[-26]
+male_forewing_length <- male_butterfly$forewing_length[-26]
 
-male_lsmodel2_tibble <- tibble(june_mean_temperature, forewing_length)
+male_lsmodel2_tibble <- tibble(june_mean_temperature, male_forewing_length)
 
-male_lsmodel2_tibble %>% ggplot(aes(june_mean_temperature, forewing_length)) + geom_point() + geom_smooth(method="lm", se=TRUE) + stat_cor(method="pearson", p.accuracy=0.001, r.accuracy=0.001) + stat_regline_equation(label.y=13.75)
+male_lsmodel2_tibble %>% ggplot(aes(june_mean_temperature, male_forewing_length)) + geom_point() + geom_smooth(method="lm", se=TRUE) + stat_cor(method="pearson", p.accuracy=0.001, r.accuracy=0.001) + stat_regline_equation(label.y=13.75)

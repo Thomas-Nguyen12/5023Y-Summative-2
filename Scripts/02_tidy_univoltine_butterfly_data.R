@@ -50,9 +50,9 @@ for (i in colnames(butterfly)) {
 }
 butterfly %>% head()
 
-year_sex <- butterfly %>% select(year, sex)  
+year_sex <- butterfly %>% select(year, sex) 
 
-duplicated_years <- a$year %>% duplicated()
+duplicated_years <- year_sex$year %>% duplicated()
 checking_duplicated_values <- year_sex %>% mutate(duplicated_years)
 checking_duplicated_values
 

@@ -1,6 +1,5 @@
 library(ggExtra)
 library(ggplot2)
-library(kableExtra)
 library(ggthemes)
 library(colorBlindness)
 library(sjPlot)
@@ -8,26 +7,6 @@ library(sjPlot)
 ## Do colourblind check
 #__________________________----
 ## PLOTS ----
-
-## All butterfly plot split by sex
-
-p1 <- butterfly %>% ggplot(aes(june_mean_temperature, forewing_length)) + 
-  geom_point(aes(colour=sex)) + 
-  geom_smooth(aes(colour=sex), level=0.95, method="lm", linetype="dashed") + 
-  theme_stata() + 
-  stat_cor(method="pearson", aes(colour=sex), label.y=c(15.5, 15.35), p.accuracy=0.001, r.accuracy=0.001) +
-  labs(x="June Mean Temperature (celsius)", y = "Forewing Length (cm)", title="Butterfly Forewing Length against June Mean Temperature") +
-  stat_regline_equation(label.y=c(15.5, 15.35), label.x=13.3, aes(colour=sex)) +
-  theme(legend.position='bottom', 
-        legend.justification='right',
-        legend.direction='horizontal')
-p1 <- ggExtra::ggMarginal(p1, type = "density", groupColour = TRUE, groupFill=TRUE) 
-
-## Checking colours against colorblindness
-cvdPlot(p1)
-
-## Saving the plot
-ggsave("01_butterfly_split_sex_linear_model.png", plot=p1, path="Output/Plots", width=10, height=10, dpi=1000)
 
 
 #__________________________----
@@ -53,7 +32,7 @@ ggsave("02_butterfly_linear_model.png", plot=p2, path="Output/Plots", dpi=1000, 
 
 ## male linear model Plot
 
-p3 <- male_lsmodel2_tibble %>% ggplot(aes(june_mean_temperature, forewing_length)) + 
+p3 <- male_lsmodel2_tibble %>% ggplot(aes(june_mean_temperature, male_forewing_length)) + 
   geom_point() +
   geom_smooth(method="lm", level=0.95, linetype="dashed") +
   theme_stata() +
@@ -71,7 +50,7 @@ ggsave("03_male_buterfly_linear_model.png", plot=p3,  path="Output/Plots", dpi=1
 
 ## Female linear model plot
 
-p4 <- female_lsmodel %>% ggplot(aes(june_mean_temperature, forewing_length)) + 
+p4 <- female_butterfly %>% ggplot(aes(june_mean_temperature, forewing_length)) + 
   geom_point() +
   geom_smooth(method="lm", level=0.95, linetype="dashed") +
   theme_stata() +
@@ -85,3 +64,9 @@ cvdPlot(p4)
 
 ## Saving the plot
 ggsave("04_female_linear_model.png", path="Output/Plots", plot=p4, width=10, height=10, dpi=1000)
+
+## Plot for comparing forewing length in Males and Females
+p5 <- butterfly %>% ggplot(aes(sex, forewing_length)) + geom_jitter(aes(colour=sex)) + theme_stata() + xlab("sex") + ylab("forewing length (cm)") + ggtitle("Forewing Length Comparison between Males and Females") + geom_bracket(xmin="female", xmax="male", y.position=15.2, label="Two sample t-test, p < 0.05") + geom_boxplot(aes(colour=sex), alpha=0) 
+
+cvdPlot(p5)
+ggsave("05_forewing_length_comparison.png", path="Output/Plots", plot=p5, width=10, height=10, dpi=1000)

@@ -41,7 +41,7 @@ influential
 
 ## Creating a new model excluding outliers
 ## Model showed slight improvements
-## model still exhibits weak positive correlation
+## model still exhibits insignificant weak positive correlation 
 
 female_lsmodel2 <- lm(forewing_length[-30:-20] ~ june_mean_temperature[-30:-20], data=female_butterfly)
 summary(female_lsmodel2)
@@ -50,18 +50,18 @@ summary(female_lsmodel2)
 performance::check_model(female_lsmodel2)
 MASS::boxcox(female_lsmodel2)
 
-## Female lsmodel2 is preferred
+## Female lsmodel is preferred
 
 ##__________________________----
 ## PLOTS ----
 
 ## Plotting female_lsmodel2
-forewing_length <- female_butterfly$forewing_length[-30:-20]
+female_forewing_length <- female_butterfly$forewing_length[-30:-20]
 june_mean_temperature <- female_butterfly$june_mean_temperature[-30:-20]
 
-female_lsmodel2_tibble <- tibble(june_mean_temperature, forewing_length)
+female_lsmodel2_tibble <- tibble(june_mean_temperature, female_forewing_length)
 
-female_lsmodel2_tibble %>% ggplot(aes(june_mean_temperature, forewing_length)) + geom_point() + geom_smooth(method="lm") + stat_cor(method="pearson", p.accuracy=0.001, r.accuracy=0.001) + stat_regline_equation(label.y=14.8)
+female_lsmodel2_tibble %>% ggplot(aes(june_mean_temperature, female_forewing_length)) + geom_point() + geom_smooth(method="lm") + stat_cor(method="pearson", p.accuracy=0.001, r.accuracy=0.001) + stat_regline_equation(label.y=14.8)
 
 
 

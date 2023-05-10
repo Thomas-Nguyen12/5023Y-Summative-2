@@ -4,6 +4,7 @@ library(tidyverse)
 library(ggplot2)
 library(ggpubr)
 library(ISLR)
+
 #__________________________----
 ## PLOTS ----
 
@@ -39,7 +40,7 @@ butterfly %>% ggplot(aes(year, june_mean_rain)) + geom_point(aes(colour=sex)) +
 
 ## Compare male and female forewing_length
 butterfly %>% ggplot(aes(sex, forewing_length)) + geom_jitter(aes(colour=sex)) + 
-  stat_summary(fun.y=mean, geom="crossbar", width=0.2) + 
+  stat_summary(fun=mean, geom="crossbar", width=0.2) + 
   geom_segment(aes(x=1, xend=2, y=mean(female_butterfly$forewing_length), yend=mean(male_butterfly$forewing_length)), linetype="dashed") + 
   stat_compare_means(paired=FALSE, method="t.test", label.x.npc="right", comparisons=list(c("female", "male")), aes(label = sprintf("p = %5.4f", as.numeric(..p.format..))))
 
@@ -48,7 +49,9 @@ stat.test <- shapiro.test(
   butterfly$forewing_length
   
 )
-butterfly %>% ggplot(aes(forewing_length)) + geom_density(aes(colour=sex, fill=sex)) + stat_pvalue_manual(stat.test, label="p.adj", y.position=0.8, x.position=12, aes(colour=sex))
+butterfly %>% ggplot(aes(forewing_length)) + geom_density(aes(fill=sex)) 
+shapiro.test(male_butterfly$forewing_length)
+shapiro.test(female_butterfly$forewing_length)
 ## Results show that forewing_length is statistically different between males and females
 ## The plot also shows that both male and femlae forewing_length are normally distributed
 
@@ -76,7 +79,7 @@ butterfly %>% ggplot(aes(june_mean_temperature, forewing_length)) + geom_point()
 
 ## Linear model for forewing_length and june_mean_temperature
 ## Linear model suggests no positive correlation
-butterfly_lsmodel <- lm(forewing_length ~ june_mean_temperature)
+butterfly_lsmodel <- lm(forewing_length ~ june_mean_temperature, data=butterfly)
 summary(butterfly_lsmodel)
 ## Here, I check the performance of this linear model
 ## Boxcox suggests that including other interaction terms is unlikely to improve performance
