@@ -17,7 +17,7 @@ I hope to include more tidy data in the future, allowing me to see if there are 
 
 This project uses R version 4.2.3.
 
-Additionally, This project uses packages: tidyverse, for data importing, data tidying, exploratory data analysis, and data wrangling; ggpubr for visual model summaries; ISLR to spot anomalies; ggExtra to display additional graphics; KableExtra to produce model tables and ggthemes for ggplot themes; colorblindr to test for colour blindness; and sjplot to create model summary tables; webshot2 to produce a visual model summary table images; knitr and rmarkdown to produce a Rmarkdown document
+Additionally, This study uses R packages: tidyverse, for data importing, data tidying, exploratory data analysis, and data wrangling; ggpubr for visual model summaries; ISLR to spot anomalies using cook's distance; ggExtra to display additional graphics; GGally for scatter matrices; performance to create model checking plots; MASS to produce model checking boxcox plots; KableExtra and gt to produce model tables; ggthemes for ggplot themes; colorblindr to test for colour blindness; and sjplot to create model summary tables; webshot2 to produce a visual model summary table images; knitr and rmarkdown to produce a Rmarkdown document. I obtained the data by collecting museum samples of the Silver Spotted Skipper and comparing them against the measured weather data of each year.
 
 All relevant files are located wtihin the Cloud/project folder.
 
