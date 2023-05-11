@@ -39,9 +39,9 @@ cooksD <- cooks.distance(female_lsmodel)
 influential <- cooksD[(cooksD > (3 * mean(cooksD, na.rm = TRUE)))]
 influential
 
-## Creating a new model excluding outliers
-## Model showed slight improvements
-## model still exhibits insignificant weak positive correlation 
+## Creating a new model excluding outliers called female_lsmodel2
+## Model did not show improvements
+## female_lsmodel2 still exhibits insignificant weak positive correlation 
 
 female_lsmodel2 <- lm(forewing_length[-30:-20] ~ june_mean_temperature[-30:-20], data=female_butterfly)
 summary(female_lsmodel2)
@@ -64,7 +64,9 @@ female_lsmodel2_tibble <- tibble(june_mean_temperature, female_forewing_length)
 female_lsmodel2_tibble %>% ggplot(aes(june_mean_temperature, female_forewing_length)) + geom_point() + geom_smooth(method="lm") + stat_cor(method="pearson", p.accuracy=0.001, r.accuracy=0.001) + stat_regline_equation(label.y=14.8)
 
 
-
-
+## finding 95% confidence intervals of female_lsmodel
+## Female forewing length ranges from 10.06288438 ~ 14.9488289
+female_butterfly_confidence_intervals <- confint(female_lsmodel)
+female_butterfly_confidence_intervals
 
 

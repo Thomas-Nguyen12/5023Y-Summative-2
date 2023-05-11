@@ -1,4 +1,4 @@
-## Exploratory Analysis
+## EXPLORATORY ANALYSIS
 
 
 library(ggplot2)
@@ -26,7 +26,7 @@ butterfly %>%
   ggplot(aes(year, forewing_length)) + geom_point(aes(colour=sex)) + 
   geom_smooth(aes(colour=sex), method="lm", se=FALSE) + 
   stat_cor(method="pearson", p.accuracy=0.001, r.accuracy=0.01, aes(colour=sex))
-## plot shows no relationship between year and forewing_length
+## plot shows no significant relationship between year and forewing_length
 
 
 
@@ -45,23 +45,26 @@ butterfly %>% ggplot(aes(sex, forewing_length)) + geom_jitter(aes(colour=sex)) +
   stat_compare_means(paired=FALSE, method="t.test", label.x.npc="right", comparisons=list(c("female", "male")), aes(label = sprintf("p = %5.4f", as.numeric(..p.format..))))
 
 
-stat.test <- shapiro.test(
-  butterfly$forewing_length
-  
-)
 butterfly %>% ggplot(aes(forewing_length)) + geom_density(aes(fill=sex)) 
 shapiro.test(male_butterfly$forewing_length)
 shapiro.test(female_butterfly$forewing_length)
 ## Results show that forewing_length is statistically different between males and females
 ## The plot also shows that both male and femlae forewing_length are normally distributed
+## Plots also show that year and june_mean_rain are not significantly correlated
 
-
+## Creating a linear model comparison between female and male forewing length
+## Found a statistically significant difference
+## Checking confidence intervals
+butterfly_compare <- lm(forewing_length ~ sex, data=butterfly)
+butterfly_compare %>% summary()
+forewing_length_confidence_intervals <- confint(butterfly_compare)
+forewing_length_confidence_intervals
 
 ## Here, I plot the relationship between june_mean_rain and forewing_length between males and females
 butterfly %>% ggplot(aes(june_mean_rain, forewing_length)) + geom_point(aes(colour=sex)) + 
   geom_smooth(se=FALSE, aes(colour=sex)) + 
   stat_cor(method="pearson", aes(colour=sex), label.x=c(400, 400), p.accuracy=0.001, r.accuracy=0.001)
-## Results show no correlation between june_mean_rain and forewing_length
+## Results show no significant correlation between june_mean_rain and forewing_length
 
 
 
@@ -75,7 +78,7 @@ butterfly %>% ggplot(aes(june_mean_temperature, forewing_length)) + geom_point()
 # This plot suggests that there is a very weak positive correlation between june_mean_temperature and the forewing_length of all butterflies
 
 #__________________________----
-## MODEL ----
+## Linear MODEL ----
 
 ## Linear model for forewing_length and june_mean_temperature
 ## Linear model suggests no positive correlation
@@ -87,13 +90,13 @@ performance::check_model(butterfly_lsmodel)
 MASS::boxcox(butterfly_lsmodel)
 
 ## Checking for outliers
-## Found outliers at x = 14, 17, 55, 57
+## Found outliers at june_mean_temperature = 14, 17, 55, 57
 cooksD <- cooks.distance(butterfly_lsmodel)
 influential <- cooksD[(cooksD > (3 * mean(cooksD, na.rm = TRUE)))]
 influential
 
 ## creating a new model excluding outliers
-## Model improved but still suggests a very weak to no positive correlation
+## Model did not improve but still suggests a very weak to no positive correlation
 butterfly_lsmodel2 <- lm(forewing_length[-57:-17] ~ june_mean_temperature[-57:-17], data=butterfly)
 summary(butterfly_lsmodel2)
 
@@ -109,7 +112,10 @@ butterfly %>% ggplot(aes(june_mean_temperature, forewing_length)) +
 ## However, there is a moderate positive correlation between male forewing_length and june_mean_temperature
 
 
-
+## Checking the 95% confidence intervals for butterfly_lsmodel
+## Butterfly forewing length ranges from 7.67706077 ~ 13.2906165
+butterfly_confidence_intervals <- confint(butterfly_lsmodel)
+butterfly_confidence_intervals
 
 
 

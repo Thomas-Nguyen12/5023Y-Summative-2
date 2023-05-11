@@ -51,7 +51,7 @@ influential
 ## Here, I try dropping outliers
 ## R-squared increased
 ## Boxcox shows that lambda=1 is still above the 95% confidence interval
-## Performance has improved
+## male_lsmodel2 shows improved performance
 male_lsmodel2 <- lm(forewing_length[-26] ~ june_mean_temperature[-26], data=male_butterfly)
 summary(male_lsmodel2)
 performance::check_model(male_lsmodel2)
@@ -71,3 +71,9 @@ male_forewing_length <- male_butterfly$forewing_length[-26]
 male_lsmodel2_tibble <- tibble(june_mean_temperature, male_forewing_length)
 
 male_lsmodel2_tibble %>% ggplot(aes(june_mean_temperature, male_forewing_length)) + geom_point() + geom_smooth(method="lm", se=TRUE) + stat_cor(method="pearson", p.accuracy=0.001, r.accuracy=0.001) + stat_regline_equation(label.y=13.75)
+
+
+## checking male_lsmodel2 95% confidence intervals
+## Male forewing length goes from 5.9802595 ~ 9.7248352
+male_butterfly_confidence_intervals <- confint(male_lsmodel2)
+male_butterfly_confidence_intervals

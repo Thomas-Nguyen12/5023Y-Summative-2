@@ -67,6 +67,7 @@ ggsave("04_female_linear_model.png", path="Output/Plots", plot=p4, width=10, hei
 
 ## Plot for comparing forewing length in Males and Females
 p5 <- butterfly %>% ggplot(aes(sex, forewing_length)) + geom_jitter(aes(colour=sex)) + theme_stata() + xlab("sex") + ylab("forewing length (cm)") + ggtitle("Forewing Length Comparison between Males and Females") + geom_bracket(xmin="female", xmax="male", y.position=15.2, label="Two sample t-test, p < 0.05") + geom_boxplot(aes(colour=sex), alpha=0) 
-
+p5 <- ggExtra::ggMarginal(p5, type="density", groupFill = TRUE)
 cvdPlot(p5)
 ggsave("05_forewing_length_comparison.png", path="Output/Plots", plot=p5, width=10, height=10, dpi=1000)
+

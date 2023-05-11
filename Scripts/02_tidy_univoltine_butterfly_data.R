@@ -16,8 +16,10 @@ butterfly <- butterfly %>% rename(june_mean_rain = rain_jun)
 butterfly <- butterfly %>% rename(june_mean_temperature = jun_mean)
 
 ## Here, I check the summary statistics and datatypes of the dataset
+## I found that june_mean_rain had a max value of 577. This is impossible and I will change it to 57.7
 butterfly %>% summary()
 butterfly %>% glimpse()
+butterfly$june_mean_rain[butterfly$june_mean_rain == 577] <- 57.7
 
 ## Here, I check for missing values
 
