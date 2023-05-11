@@ -91,9 +91,9 @@ MASS::boxcox(butterfly_lsmodel)
 
 ## Checking for outliers
 ## Found outliers at june_mean_temperature = 14, 17, 55, 57
-cooksD <- cooks.distance(butterfly_lsmodel)
-influential <- cooksD[(cooksD > (3 * mean(cooksD, na.rm = TRUE)))]
-influential
+butterfly_cooksD <- cooks.distance(butterfly_lsmodel)
+butterfly_influential <- butterfly_cooksD[(butterfly_cooksD > (3 * mean(butterfly_cooksD, na.rm = TRUE)))]
+butterfly_influential
 
 ## creating a new model excluding outliers
 ## Model did not improve but still suggests a very weak to no positive correlation

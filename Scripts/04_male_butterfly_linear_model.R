@@ -43,9 +43,9 @@ print(best_lambda)
 
 ## checking outliers using cook's distance
 ## found outlier at row = 26
-cooksD <- cooks.distance(male_lsmodel)
-influential <- cooksD[(cooksD > (3 * mean(cooksD, na.rm = TRUE)))]
-influential
+male_cooksD <- cooks.distance(male_lsmodel)
+male_influential <- male_cooksD[(male_cooksD > (3 * mean(male_cooksD, na.rm = TRUE)))]
+male_influential
 
 
 ## Here, I try dropping outliers
@@ -56,7 +56,7 @@ male_lsmodel2 <- lm(forewing_length[-26] ~ june_mean_temperature[-26], data=male
 summary(male_lsmodel2)
 performance::check_model(male_lsmodel2)
 MASS::boxcox(male_lsmodel2)
-best_lambda2 <- male_butterfly$june_mean_temperature[-26][which.max(male_butterfly$forewing_length[-26])]
+male_best_lambda2 <- male_butterfly$june_mean_temperature[-26][which.max(male_butterfly$forewing_length[-26])]
 
 ## male_lsmodel2 is preferred
 

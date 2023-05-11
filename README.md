@@ -3,11 +3,11 @@ output:
   pdf_document: default
   html_document: default
 ---
-# "Analysis of Hesperia Comma, the Silver spotted Skipper and their responses to climate change" - 5023y Summative-2
+# "Analysis of *Hesperia Comma*, the Silver spotted Skipper and their responses to climate change" - 5023y Summative-2
 
 ### Project description: 
 
-This project analyses how Hesperia comma butterflies respond to climate change, specifically temperature variations.
+This project analyses how Hesperia comma butterflies respond to climate change, specifically temperature variations. I hypothesised a positive linear relationship between June temperatures and the *Hesperia comma* forewing length because juvenile hormones, ecdysteroids, and other signalling molecules are critical for proper growth and development in butterfly genes involved in growth and development. I found a significant positive linear relationship across butterflies as a whole and June mean temperature as well as in male butterflies. I did not find the same in Female butterflies.
 
 I faced challenges with certain repeated values in the "year" column, having to check if these values interferred with the analysis. Fortunately, repeated years represented Male and Female butterflies being measured in the same year. Additionally, the dataset was relatively small, allowing only so much representation.
 

@@ -35,9 +35,9 @@ MASS::boxcox(female_lsmodel)
 
 ## finding outliers
 ## found outliers at june_mean_temperature = 20, 26 and 30
-cooksD <- cooks.distance(female_lsmodel)
-influential <- cooksD[(cooksD > (3 * mean(cooksD, na.rm = TRUE)))]
-influential
+female_cooksD <- cooks.distance(female_lsmodel)
+female_influential <- female_cooksD[(female_cooksD > (3 * mean(female_cooksD, na.rm = TRUE)))]
+female_influential
 
 ## Creating a new model excluding outliers called female_lsmodel2
 ## Model did not show improvements
