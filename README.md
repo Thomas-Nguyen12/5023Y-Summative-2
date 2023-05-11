@@ -1,7 +1,7 @@
 ---
 output:
-  html_document: default
   pdf_document: default
+  html_document: default
 ---
 # "Analysis of Hesperia Comma, the Silver spotted Skipper and their responses to climate change" - 5023y Summative-2
 
@@ -29,6 +29,6 @@ All Tables and graphs used within the Rmarkdown file are located within the Outp
 
 
 ### Credits:
-
+This was a solo project.
 I used 'freecodecamp.org' for tutorials on how to write this README.md file and "w3schools.com" scripting tutorials.
 
