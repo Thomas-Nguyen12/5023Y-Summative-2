@@ -53,7 +53,7 @@ This is the <b>full</b> project structure. <b>Note that this repository allowed 
 ├── Data/
 │   ├── cricket_song.csv
 │   ├── elegans_offspring.xlsx
-│   └── univoltine_butterfly.csv
+│   └── univoltine_butterfly.csv   # I analysed this dataset
 ├── Examples/
 │   ├── analysis.R
 │   ├── example paper 1.pdf
@@ -68,7 +68,7 @@ This is the <b>full</b> project structure. <b>Note that this repository allowed 
 │   ├── fly.png
 │   ├── reporting.png
 │   └── Rplot01.png
-├── Output/
+├── Output/    # the set of outputs that resulted from my analysis of the univoltine_butterfly.csv dataset
 │   ├── Plots/
 │   │   ├── 01_butterfly_split_sex_linear_model.png
 │   │   ├── 02_butterfly_linear_model.png
@@ -88,9 +88,9 @@ This is the <b>full</b> project structure. <b>Note that this repository allowed 
 ├── README.html
 ├── README.md
 ├── README.pdf
-├── report.pdf
-├── report.Rmd
-└── Scripts/
+├── report.pdf    # my report in pdf format
+├── report.Rmd    # my Rmarkdown report
+└── Scripts/    # the full set of analytical scripts I created
     ├── 01_import_unvoltine_butterfly_data.R
     ├── 02_tidy_univoltine_butterfly_data.R
     ├── 03_exploratory_analysis.R
